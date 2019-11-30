@@ -48,7 +48,7 @@ public class GreetingController {
     @RequestMapping("/{id}")
     public HttpEntity<Greeting> lists(@RequestParam(value="name",required = false,defaultValue = "world") String name,@PathVariable(value = "id") String id){
         Greeting greeting = new Greeting(String.format(TEMPLATE,name));
-        greeting.add(entityLinks.linkForSingleResource(Greeting.class,1).withSelfRel());
+        greeting.add(entityLinks.linkForSingleResource(Greeting.class,id).withRel("item"));
         return new ResponseEntity<>(greeting, HttpStatus.OK);
     }
 }

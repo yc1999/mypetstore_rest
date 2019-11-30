@@ -5,17 +5,26 @@ import java.util.List;
 import org.csu.mypetstore.domain.Student;
 import org.csu.mypetstore.DAO.StudentDAO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.EntityLinks;
+import org.springframework.hateoas.ExposesResourceFor;
 import org.springframework.web.bind.annotation.*;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 @RestController
+@ExposesResourceFor(Student.class)
 @RequestMapping("/student")
 public class StudentController {
     @Autowired
     StudentDAO studentDAO;
 
+    @Autowired
+    private EntityLinks entityLinks;
+
     @GetMapping("/{id}")
     public Student getStudent(@PathVariable("id") int id) {
         Student s = studentDAO.getOne(id);
+        s.add(entityLinks.linkForSingleResource(Student.class,id).withSelfRel());
         return s;
     }
     @GetMapping("/students")

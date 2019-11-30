@@ -1,6 +1,7 @@
 package org.csu.mypetstore.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.hateoas.ResourceSupport;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,10 +12,10 @@ import javax.persistence.Table;
 @Table(name="student")//对应的表
 @JsonIgnoreProperties({ "handler","hibernateLazyInitializer" })
 //感觉这些就是使用那个jpa所需要的东西
-public class Student {
+public class Student extends ResourceSupport {
     @Id
     @Column(name = "id")
-    private int id;
+    private int stuId;
 
     @Column(name="name")
     private String name;
@@ -23,12 +24,12 @@ public class Student {
     @Column(name="age")
     private int age;
 
-    public int getId() {
-        return id;
+    public int getStuId() {
+        return stuId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setStuId(int stuId) {
+        this.stuId = stuId;
     }
 
     public String getName() {
@@ -49,7 +50,7 @@ public class Student {
 
     @Override
     public String toString(){
-        return "Student [id="+id+", name="+", age="+age+"]";
+        return "Student [id="+stuId+", name="+", age="+age+"]";
     }
 
 }
