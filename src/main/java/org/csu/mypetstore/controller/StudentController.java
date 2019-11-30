@@ -27,27 +27,27 @@ public class StudentController {
         s.add(entityLinks.linkForSingleResource(Student.class,id).withSelfRel());
         return s;
     }
+
     @GetMapping("/students")
     public List<Student> listStudents(){
         return studentDAO.findAll();
     }
+
     @PostMapping("")
     public List<Student> addStudent(Student s){
         studentDAO.save(s);
         return studentDAO.findAll();
     }
+
     @PutMapping("/{id}")
     public List<Student> updateStudent(Student s){
         studentDAO.save(s);
         return studentDAO.findAll();
     }
+
     @DeleteMapping("/{id}")
     public List<Student> deleteStudent (Student s){
         studentDAO.delete(s);
         return studentDAO.findAll();
-    }
-    @GetMapping("/test")
-    public String test() {
-        return "nihao";
     }
 }
